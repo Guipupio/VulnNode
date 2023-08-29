@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
     const username = req.query.username;
     const accessToken = req.query['access-token'];
 
-    const queryString = `SELECT * FROM matabase WHERE username='${username}' AND access_token='${accessToken}';`
+    const queryString = `SELECT * FROM users WHERE username='${username}' AND access_token='${accessToken}';`
 
     database.query(queryString, (err, rows, fields) => {
         if (err) {
