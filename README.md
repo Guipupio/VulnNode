@@ -1,5 +1,5 @@
-# OWASPinho
-- [OWASPinho](#owaspinho)
+# Vulnerable Node Application
+- [Vulnerable Node Application](#vulnerable-node-application)
   - [Execução](#execução)
   - [Vulnerabilidades](#vulnerabilidades)
     - [XSS](#xss)
