@@ -29,7 +29,7 @@ services:
 
 
 volumes:
-  db_data:
+  db_data: {}
 
 networks:
   default:

