@@ -9,8 +9,8 @@
 ## Execução
 Descompactação e execução dos containers por linha de comando.
 ```
-$ unzip VulnNode-Nome.zip
-$ cd VulnNode-Nome
+$ unzip VulnNode.zip
+$ cd VulnNode
 $ docker-compose up
 ```
 Exemplo após a inicialização dos containers.
