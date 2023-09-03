@@ -26,6 +26,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    command: ["sh", "-c", "python wait-for-it.py db 3306 60 && npm start"]
 
 
 volumes:
