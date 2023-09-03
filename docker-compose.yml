@@ -4,10 +4,10 @@ services:
     image: mysql:8.0
     container_name: db
     environment:
-      MYSQL_ROOT_PASSWORD: rootinho
-      MYSQL_DATABASE: rooto
-      MYSQL_USER: nodinho
-      MYSQL_PASSWORD: rootinho
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
       - ./init-script.sql:/docker-entrypoint-initdb.d/init-script.sql
@@ -21,10 +21,15 @@ services:
     container_name: app
     build: .
     ports:
-      - "3000:3000"
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PORT: ${MYSQL_PORT}
     depends_on:
       - db
-    command: ["sh", "-c", "python wait-for-it.py db 3306 60 && npm start"]
+    command: ["sh", "-c", "python wait-for-it.py db 3306 ${WAIT_DB_TIMEOUT} && npm start"]
 
 
 volumes:
