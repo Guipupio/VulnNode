@@ -6,9 +6,9 @@ router.get('/', function (req, res, next) {
     const username = req.query.username;
     const accessToken = req.query['access-token'];
 
-    const queryString = `SELECT * FROM users WHERE username='${username}' AND access_token='${accessToken}';`
-
-    database.query(queryString, (err, rows, ) => {
+    const queryString = `SELECT * FROM users WHERE username=? AND access_token=?;`
+    
+    database.query(queryString, [username, accessToken], (err, rows, ) => {
         if (err) {
             console.log('Failed to query for users: ' + err);
             res.sendStatus(500);
