@@ -27,6 +27,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_PORT: ${MYSQL_PORT}
+      NODE_ENV: ${NODE_ENV}
     depends_on:
       - db
     command: ["sh", "-c", "python wait-for-it.py db 3306 ${WAIT_DB_TIMEOUT} && npm start"]
