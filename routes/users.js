@@ -1,6 +1,11 @@
 const express = require('express');
+const xss = require("xss")
+
 const router = express.Router();
+
 const database = require('../database/databaseConnection');
+const user_access_check = require("../utils/utils");
+
 
 router.get('/', function (req, res, next) {
     const username = req.query.username;
@@ -23,13 +28,25 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/has-access', (req, res) => {
-    const userId = req.query.userId;
-    const resourceId = req.query.resourceId;
-    const userAccessCheck = req.query.userAccessCheck;
+    // Uma vez que vamos devolver o userId e resourceId recebido pelo usuário
+    // Estamos adicionando um controle para evitar um XSS
+    const userId = xss(req.query.userId);
+    const resourceId = xss(req.query.resourceId);
 
+    
     try {
-        const hasAccess = eval(`(${userAccessCheck})(${userId}, ${resourceId})`);
-        res.send(`User ${userId} has access to ${resourceId}: ${hasAccess}`);
+        // Dependendo do contexto da aplicaçao poderiamos garantir que esses Ids
+        // Sejam numéricos e retornamos um erro 400 caso nao sejam.
+        if(isNaN(userId) || isNaN(resourceId)){
+            res.status(400).send("BAD REQUEST! Something is wrong with the parameters.")
+        }
+        else {
+            const hasAccess = user_access_check(userId, resourceId)
+    
+            const message = hasAccess ? "Success!" : "Fail!"
+
+            res.send(`User ${userId} access to resource ${resourceId}: ${message}`);
+        }
     } catch (error) {
         res.status(500).send('Error checking user access');
     }
