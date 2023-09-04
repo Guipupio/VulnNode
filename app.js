@@ -23,6 +23,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/actuator', actuatorRouter)
 
+// Remocao da header
+app.disable('x-powered-by');
+
 app.use(function (req, res, next) {
     next(createError(404));
 });

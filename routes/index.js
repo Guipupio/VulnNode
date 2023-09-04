@@ -1,9 +1,20 @@
 const express = require('express');
+const sanitizerXss = require("xss");
+
 const router = express.Router();
 
+
 router.get('/', function(req, res, next) {
-  const userInput = req.query.userInput;
-  res.render('index', { title: 'Vulnerable Node Application!' , userInput: userInput});
+
+  const sanitizedUserInput = sanitizerXss(req.query.userInput);
+
+  res.render(
+    'index',
+    {
+      title: 'Vulnerable Node Application!',
+      userInput: sanitizedUserInput
+    }
+  );
 
 });
 
